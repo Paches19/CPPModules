@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:09:29 by adpachec          #+#    #+#             */
-/*   Updated: 2023/05/22 14:06:12 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:31:56 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,21 @@
 class PhoneBook 
 {
 	public:
-		PhoneBook();
-		void addContact();
-		void searchContacts() const;
+		PhoneBook(void);
+		~PhoneBook(void);
+		void addContact(void);
+		void searchContacts(void) const;
 	private:
 		Contact contacts[8];
 		int contactCount;
 		int oldestContact;
 
-		std::string setFirstName();
-		std::string setLastName();
-		std::string setNickName();
-		std::string setPhoneNumber();
-		std::string setDaarkestSecret();
-		void printContacts() const;
+		std::string setFirstName(void);
+		std::string setLastName(void);
+		std::string setNickName(void);
+		std::string setPhoneNumber(void);
+		std::string setDaarkestSecret(void);
+		void printContacts(void) const;
 };
 
 #endif

@@ -6,40 +6,45 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:57:29 by adpachec          #+#    #+#             */
-/*   Updated: 2023/05/22 13:47:46 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:33:29 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
-Contact::Contact() {}
+Contact::Contact(void) {}
 
 Contact::Contact(const std::string& firstName, const std::string& lastName, const std::string& nickName,
                  const std::string& phoneNumber, const std::string& darkestSecret)
     : firstName(firstName), lastName(lastName), nickName(nickName),
       phoneNumber(phoneNumber), darkestSecret(darkestSecret) {}
 
-std::string Contact::getFirstName() const 
+std::string Contact::getFirstName(void) const 
 {
     return this->firstName;
 }
 
-std::string Contact::getLastName() const 
+std::string Contact::getLastName(void) const 
 {
     return this->lastName;
 }
 
-std::string Contact::getNickName() const 
+std::string Contact::getNickName(void) const 
 {
     return this->nickName;
 }
 
-std::string Contact::getPhoneNumber() const 
+std::string Contact::getPhoneNumber(void) const 
 {
     return this->phoneNumber;
 }
 
-std::string Contact::getDarkestSecret() const 
+std::string Contact::getDarkestSecret(void) const 
 {
     return this->darkestSecret;
+}
+
+Contact::~Contact(void)
+{
+    return ;
 }

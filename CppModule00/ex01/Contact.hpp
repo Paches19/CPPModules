@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:10:29 by adpachec          #+#    #+#             */
-/*   Updated: 2023/05/22 12:25:55 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:33:21 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,17 @@
 class Contact 
 {
 	public:
-		Contact();
+		Contact(void);
 		Contact(const std::string& firstName, const std::string& lastName,
 			const std::string& nickname, const std::string& phoneNumber,
 				const std::string& darkestSecret);
-		
-		std::string getFirstName() const;
-		std::string getLastName() const;
-		std::string getNickName() const;
-		std::string getPhoneNumber() const;
-		std::string getDarkestSecret() const;
+		~Contact(void);
+
+		std::string getFirstName(void) const;
+		std::string getLastName(void) const;
+		std::string getNickName(void) const;
+		std::string getPhoneNumber(void) const;
+		std::string getDarkestSecret(void) const;
 	private:
 		std::string firstName;
         std::string lastName;

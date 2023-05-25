@@ -6,17 +6,18 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:56:31 by adpachec          #+#    #+#             */
-/*   Updated: 2023/05/22 14:12:57 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:33:09 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include <iostream>
 #include <iomanip>
+#include <limits>
 
-PhoneBook::PhoneBook() : contactCount(0), oldestContact(0) {}
+PhoneBook::PhoneBook(void) : contactCount(0), oldestContact(0) {}
 
-std::string PhoneBook::setFirstName()
+std::string PhoneBook::setFirstName(void)
 {
 	std::string firstName;
 
@@ -36,7 +37,7 @@ std::string PhoneBook::setFirstName()
 	return firstName;
 }
 
-std::string PhoneBook::setLastName()
+std::string PhoneBook::setLastName(void)
 {
 	std::string lastName;
 
@@ -56,7 +57,7 @@ std::string PhoneBook::setLastName()
 	return lastName;
 }
 
-std::string PhoneBook::setNickName()
+std::string PhoneBook::setNickName(void)
 {
 	std::string nickName;
 
@@ -76,7 +77,7 @@ std::string PhoneBook::setNickName()
 	return nickName;
 }
 
-std::string PhoneBook::setPhoneNumber()
+std::string PhoneBook::setPhoneNumber(void)
 {
 	std::string phoneNumber;
 
@@ -96,7 +97,7 @@ std::string PhoneBook::setPhoneNumber()
 	return phoneNumber;
 }
 
-std::string PhoneBook::setDaarkestSecret()
+std::string PhoneBook::setDaarkestSecret(void)
 {
 	std::string darkestSecret;
 
@@ -116,7 +117,7 @@ std::string PhoneBook::setDaarkestSecret()
 	return darkestSecret;
 }
 
-void PhoneBook::addContact() 
+void PhoneBook::addContact(void) 
 {
 	std::string firstName, lastName, nickName, phoneNumber, darkestSecret;
 	
@@ -152,7 +153,7 @@ void PhoneBook::addContact()
 	std::cout << std::endl << "Enter the command you want to run" << std::endl;
 }
 
-void PhoneBook::printContacts() const
+void PhoneBook::printContacts(void) const
 {
 	std::cout << "---------------------------------------------------------" << std::endl;
 	std::cout << "|    Index    |  First Name |  Last Name  |  Nickname   |" << std::endl;
@@ -169,10 +170,10 @@ void PhoneBook::printContacts() const
 			this->contacts[i].getNickName().substr(0, 9) + "." : this->contacts[i].getNickName()) << " |" << std::endl;
 	}
 
-	std::cout << "------------------------------------------------------------------" << std::endl;
+	std::cout << "---------------------------------------------------------" << std::endl;
 }
 
-void PhoneBook::searchContacts() const 
+void PhoneBook::searchContacts(void) const 
 {
 	printContacts();
 	if (contactCount > 0) 
@@ -181,21 +182,38 @@ void PhoneBook::searchContacts() const
 		
 		std::cout << "Enter the index of the contact to display: ";
 		std::cin >> index;
-		std::cin.ignore();
-
-		if (index >= 0 && index < contactCount) 
+		
+		if (std::cin >> index && !std::cin.fail())
 		{
-			std::cout << "----------------------------------------------" << std::endl;
-			std::cout << "First Name: " << this->contacts[index].getFirstName() << std::endl;
-			std::cout << "Last Name: " << this->contacts[index].getLastName() << std::endl;
-			std::cout << "Nickname: " << this->contacts[index].getNickName() << std::endl;
-			std::cout << "Phone Number: " << this->contacts[index].getPhoneNumber() << std::endl;
-			std::cout << "Darkest Secret: " << this->contacts[index].getDarkestSecret() << std::endl;
-		} 
-		else 
+			std::cin.ignore();
+			if (index >= 0 && index < contactCount) 
+			{
+				std::cout << "---------------------------------------------------------" << std::endl;
+				std::cout << "First Name: " << this->contacts[index].getFirstName() << std::endl;
+				std::cout << "Last Name: " << this->contacts[index].getLastName() << std::endl;
+				std::cout << "Nickname: " << this->contacts[index].getNickName() << std::endl;
+				std::cout << "Phone Number: " << this->contacts[index].getPhoneNumber() << std::endl;
+				std::cout << "Darkest Secret: " << this->contacts[index].getDarkestSecret() << std::endl;
+			}
+			else
+			{
+				std::cin.clear();
+				std::cout << "Invalid index. No contact found." << std::endl;
+			}
+		}
+		else
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "Invalid index. No contact found." << std::endl;
+		}
 	} 
-	else 
+	else
 		std::cout << "No contacts in the phone book." << std::endl;
 	std::cout << std::endl << "Enter the command you want to run" << std::endl;
+}
+
+PhoneBook::~PhoneBook(void)
+{
+	return ;
 }

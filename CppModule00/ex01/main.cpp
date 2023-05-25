@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 12:50:32 by adpachec          #+#    #+#             */
-/*   Updated: 2023/05/22 13:55:54 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:43:29 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int main()
             break;
         else
             std::cout << "Invalid command. Please try again." << std::endl;
-		if(std::cin.fail())
-			return 1;
     }
     return 0;
 }
