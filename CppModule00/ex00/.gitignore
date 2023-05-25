@@ -6,4 +6,7 @@
 *.a
 a.out
 *.txt
+philosophers
 obj
+philo
+LazyPhilosophersTester

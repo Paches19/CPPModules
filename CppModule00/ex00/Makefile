@@ -6,7 +6,7 @@
 #    By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 10:51:09 by adpachec          #+#    #+#              #
-#    Updated: 2023/05/22 11:06:10 by adpachec         ###   ########.fr        #
+#    Updated: 2023/05/25 11:27:30 by adpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME	=  megaphone
 
 #Sources 
-SRCS	= megaphone.cpp
+SRCS	= Megaphone.cpp
 
 #Objects
 OBJS	= $(SRCS:.cpp=.o)

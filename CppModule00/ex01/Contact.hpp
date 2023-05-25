@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:10:29 by adpachec          #+#    #+#             */
-/*   Updated: 2023/05/25 11:33:21 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:15:34 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 
 class Contact 
 {
+	private:
+		std::string firstName;
+		std::string lastName;
+		std::string nickName;
+		std::string phoneNumber;
+		std::string darkestSecret;
 	public:
 		Contact(void);
 		Contact(const std::string& firstName, const std::string& lastName,
@@ -29,12 +35,7 @@ class Contact
 		std::string getNickName(void) const;
 		std::string getPhoneNumber(void) const;
 		std::string getDarkestSecret(void) const;
-	private:
-		std::string firstName;
-        std::string lastName;
-        std::string nickName;
-        std::string phoneNumber;
-        std::string darkestSecret;
+	
 };
 
 #endif

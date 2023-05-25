@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RandomChump.cpp                                    :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/25 19:36:26 by adpachec          #+#    #+#             */
-/*   Updated: 2023/05/25 19:49:05 by adpachec         ###   ########.fr       */
+/*   Created: 2023/05/25 18:16:41 by adpachec          #+#    #+#             */
+/*   Updated: 2023/05/25 20:38:18 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef ZOMBIE_HPP
+#define ZOMBIE_HPP
 
-void randomChump(std::string name)
+#include <string>
+
+class Zombie
 {
-	Zombie zombie(name);
-	zombie.announce();
-}
+	private:
+		std::string _name;
+
+	public:
+		Zombie(std::string name);
+		Zombie(void);
+		~Zombie();
+		void setName(std::string name);
+		void announce();
+};
+
+Zombie* newZombie(std::string name);
+void randomChump(std::string name);
+
+#endif
