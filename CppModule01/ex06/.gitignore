@@ -1,0 +1,12 @@
+#hidden files
+.DS_store
+.vscode
+.git
+*.o
+*.a
+a.out
+*.txt
+obj
+zombie
+harl
+harlFilter
