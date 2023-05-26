@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:57:29 by adpachec          #+#    #+#             */
-/*   Updated: 2023/05/25 11:33:29 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:30:49 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,4 @@ std::string Contact::getDarkestSecret(void) const
     return this->darkestSecret;
 }
 
-Contact::~Contact(void)
-{
-    return ;
-}
+Contact::~Contact(void) {}

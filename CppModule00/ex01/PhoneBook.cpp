@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:56:31 by adpachec          #+#    #+#             */
-/*   Updated: 2023/05/25 11:33:09 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:31:00 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,4 @@ void PhoneBook::searchContacts(void) const
 	std::cout << std::endl << "Enter the command you want to run" << std::endl;
 }
 
-PhoneBook::~PhoneBook(void)
-{
-	return ;
-}
+PhoneBook::~PhoneBook(void) {}
