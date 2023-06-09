@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:31:29 by adpachec          #+#    #+#             */
-/*   Updated: 2023/05/30 18:13:19 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:20:01 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,31 @@
 
 int main()
 {
-	ClapTrap clapTrap("Adpachec");
+	ClapTrap Adpachec("Adpachec");
+	ClapTrap Enemy("Enemy");
 
-	clapTrap.attack("Enemy");
-	clapTrap.takeDamage(5);
-	clapTrap.beRepaired(3);
-	clapTrap.attack("Enemy");
-	clapTrap.takeDamage(15);
-	clapTrap.takeDamage(15);
-	clapTrap.beRepaired(2);
-	clapTrap.attack("Enemy");
-	clapTrap.attack("Enemy");
-	clapTrap.attack("Enemy");
-	clapTrap.attack("Enemy");
-	clapTrap.attack("Enemy");
-	clapTrap.attack("Enemy");
-	clapTrap.attack("Enemy");
-	clapTrap.attack("Enemy");
-	clapTrap.attack("Enemy");
-	clapTrap.attack("Enemy");
-	clapTrap.attack("Enemy");
-	clapTrap.attack("Enemy");
+	Adpachec.attack("Enemy");
+	Enemy.takeDamage(5);
+	Enemy.beRepaired(5);
+	Enemy.attack("Adpachec");
+	Adpachec.takeDamage(5);
+	Enemy.attack("Adpachec");
+	Adpachec.takeDamage(15);
+	Enemy.attack("Adpachec");
+	Adpachec.takeDamage(15);
+	Adpachec.beRepaired(2);
+	Adpachec.attack("Enemy");
+	Adpachec.attack("Enemy");
+	Adpachec.attack("Enemy");
+	Adpachec.attack("Enemy");
+	Adpachec.attack("Enemy");
+	Adpachec.attack("Enemy");
+	Adpachec.attack("Enemy");
+	Adpachec.attack("Enemy");
+	Adpachec.attack("Enemy");
+	Adpachec.attack("Enemy");
+	Adpachec.attack("Enemy");
+	Adpachec.attack("Enemy");
 
 	return 0;
 }
