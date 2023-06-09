@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 11:31:51 by adpachec          #+#    #+#             */
-/*   Updated: 2023/06/09 12:15:07 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:33:11 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ ScavTrap::ScavTrap(void) : ClapTrap()
 	this->setHitPoints(100);
 	this->setEnergy(50);
 	this->setAttackDamage(20);
-	std::cout << "ScavTrap default constructor called" << std::endl;
+	std::cout << "ScavTrap " << this->getName() << " created by copy!" << std::endl;
 }
 
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
@@ -25,12 +25,12 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 	this->setHitPoints(100);
 	this->setEnergy(50);
 	this->setAttackDamage(20);
-	std::cout << "ScavTrap name constructor called" << std::endl;
+	std::cout << "ScavTrap " << this->getName() << " created with name!" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap & other) : ClapTrap(other)
 {
-	std::cout << "ScavTrap copy constructor called." << std::endl;
+	std::cout << "ScavTrap " << this->getName() << " created by copy!" << std::endl;
 }
 
 ScavTrap::~ScavTrap(void)

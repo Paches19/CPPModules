@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:30:54 by adpachec          #+#    #+#             */
-/*   Updated: 2023/05/30 18:14:33 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:32:56 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 ClapTrap::ClapTrap(void)
 	: _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << "ClapTrap " << this->_name << " created!" << std::endl;
+	std::cout << "ClapTrap " << this->_name << " created by default!" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string& name)
 	: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << "ClapTrap " << this->_name << " created!" << std::endl;
+	std::cout << "ClapTrap " << this->_name << " created with name!" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other)
@@ -110,4 +110,24 @@ void ClapTrap::beRepaired(unsigned int amount)
 	}
 	else 
 		std::cout << "ClapTrap " << this->_name << " can't be repaired as it has no energy points!" << std::endl;
+}
+
+void ClapTrap::setName(std::string &name)
+{
+	this->_name = name;
+}
+		
+void ClapTrap::setHitPoints(unsigned int hp)
+{
+	this->_hitPoints = hp;
+}
+		
+void ClapTrap::setEnergy(unsigned int energy)
+{
+	this->_energyPoints = energy;
+}
+
+void ClapTrap::setAttackDamage(unsigned int attack_damage)
+{
+	this->_attackDamage = attack_damage;
 }
