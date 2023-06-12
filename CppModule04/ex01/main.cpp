@@ -6,23 +6,30 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:59:14 by adpachec          #+#    #+#             */
-/*   Updated: 2023/06/12 13:31:59 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:45:02 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "stdlib.h"
 
 int main()
 {
+	const Animal* animal = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 
+	std::cout << "Generic animal" << " sound: ";
+    animal->makeSound();
+	std::cout << i->getType() << " sound: ";
+    i->makeSound();
+    std::cout << j->getType() << " sound: ";
+    j->makeSound();
+	
 	delete j;
 	delete i;
+	delete animal;
 
 	const int size = 10;
 	Animal* animals[size];

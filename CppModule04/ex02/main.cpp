@@ -6,15 +6,13 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:59:14 by adpachec          #+#    #+#             */
-/*   Updated: 2023/06/12 13:31:59 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:43:55 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "stdlib.h"
 
 int main()
 {
