@@ -6,19 +6,16 @@
 #    By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 10:51:09 by adpachec          #+#    #+#              #
-#    Updated: 2023/06/13 13:49:40 by adpachec         ###   ########.fr        #
+#    Updated: 2023/06/13 10:40:50 by adpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Program name
-NAME	=	aform
+NAME	=	sign
 
 #Sources 
 SRCS	=	Bureaucrat.cpp \
-			AForm.cpp \
-			ShrubberyCreationForm.cpp \
-			RobotomyRequestForm.cpp \
-			PresidentialPardonForm.cpp \
+			Form.cpp \
 			main.cpp
 
 #Objects
