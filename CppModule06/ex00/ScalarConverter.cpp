@@ -34,8 +34,6 @@ void ScalarConverter::display() const
 		val = -INFINITY;
 	else if (_str == "+inff" || _str == "inff" || _str == "+inf" || _str == "inf")
 		val = INFINITY;
-	else if (_str == "nanf" || _str == "nan")
-		val = NAN;
 	else
 	{
 		if (!(ss >> val))
