@@ -16,17 +16,14 @@ int main(int argc, char** argv)
 {
 	if (argc != 2)
 	{
-		std::cout << "Usage: ./convert <literal>" << std::endl;
+		std::cerr << "Error: Incorrect number of arguments." << std::endl;
+		std::cerr << "Usage: ./convert <value>" << std::endl;
 		return 1;
 	}
 
-	std::string literal = argv[1];
-	ScalarConverter converter;
+	ScalarConverter convert(argv[1]);
 
-	converter.convertToChar(literal);
-	converter.convertToInt(literal);
-	converter.convertToFloat(literal);
-	converter.convertToDouble(literal);
+	convert.display();
 
 	return 0;
 }

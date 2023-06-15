@@ -10,35 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-# define SCALARCONVERTER_HPP
+#ifndef SCALARCONVERTER_H
+#define SCALARCONVERTER_H
 
-#include <iostream>
+#include <string>
 #include <sstream>
-#include <cstdlib>
-#include <cctype>
+#include <iostream>
+#include <iomanip>
+#include <climits>
 #include <cmath>
 
 class ScalarConverter
 {
-	public:
+	private:
+		std::string _str;
+		void printAsChar(double val) const;
+		void printAsInt(double val) const;
+		void printAsFloat(double val) const;
+		void printAsDouble(double val) const;
 
-		ScalarConverter(void);
+	public:
+		ScalarConverter(const std::string& str);
 		ScalarConverter(const ScalarConverter& other);
-		~ScalarConverter(void);
-		
+		~ScalarConverter();
+
 		ScalarConverter& operator=(const ScalarConverter& other);
 
-		class ConversionException : public std::exception
-		{
-			public:
-				virtual const char* what() const throw();
-		};
-
-		void convertToChar(const std::string& literal) const;
-		void convertToInt(const std::string& literal) const;
-		void convertToFloat(const std::string& literal) const;
-		void convertToDouble(const std::string& literal) const;
+		void display() const;
+		bool isNan(double val) const;
+		bool isInf(double val) const;
 };
 
 #endif
