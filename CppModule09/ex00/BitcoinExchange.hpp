@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:51:26 by adpachec          #+#    #+#             */
-/*   Updated: 2023/07/04 17:08:35 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/07/05 11:48:41 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,17 @@
 class BitcoinExchange
 {
 	private:
-		std::map<std::string, float> database;
+		std::map<std::string, float> _database;
 
 		void loadDatabase(std::string& filename);
-		float getExchangeRate(const std::string& date);
 		bool isValidDate(const std::string& date);
 		bool isValidValue(std::string& value);
+		float getExchangeRate(const std::string& inputKey);
 		int getDateDifference(const std::string& date1, const std::string& date2);
 		void getOutput(std::string& line);
 
 	public:
 		BitcoinExchange();
-		// BitcoinExchange(std::string& filename);
 		BitcoinExchange(const BitcoinExchange& other);
 		~BitcoinExchange();
 
