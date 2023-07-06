@@ -6,7 +6,7 @@
 #    By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 10:51:09 by adpachec          #+#    #+#              #
-#    Updated: 2023/06/13 13:49:40 by adpachec         ###   ########.fr        #
+#    Updated: 2023/07/06 13:46:02 by adpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,13 @@ SRCS	=	Bureaucrat.cpp \
 			RobotomyRequestForm.cpp \
 			PresidentialPardonForm.cpp \
 			main.cpp
+			
+#Headers
+HEADERS = Bureaucrat.hpp \
+		  AForm.hpp \
+		  ShrubberyCreationForm.hpp \
+		  RobotomyRequestForm.hpp \
+		  PresidentialPardonForm.hpp
 
 #Objects
 OBJS	= $(SRCS:.cpp=.o)
@@ -36,7 +43,7 @@ OBJ = $(addprefix $(OBJS_DIR), $(OBJS))
 
 all: create_dir $(NAME)
 
-$(NAME): $(OBJ) Makefile
+$(NAME): Makefile $(OBJ) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 create_dir:

@@ -6,7 +6,7 @@
 #    By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 10:51:09 by adpachec          #+#    #+#              #
-#    Updated: 2023/06/14 14:04:34 by adpachec         ###   ########.fr        #
+#    Updated: 2023/07/06 13:42:59 by adpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,9 @@ NAME	=	serialize
 
 #Sources 
 SRCS	=	main.cpp
+
+#Headers
+HEADERS =
 
 #Objects
 OBJS	= $(SRCS:.cpp=.o)

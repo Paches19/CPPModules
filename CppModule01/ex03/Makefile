@@ -6,7 +6,7 @@
 #    By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 10:51:09 by adpachec          #+#    #+#              #
-#    Updated: 2023/05/26 11:33:31 by adpachec         ###   ########.fr        #
+#    Updated: 2023/07/06 13:52:46 by adpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,11 @@ SRCS	=	Weapon.cpp \
 			HumanA.cpp \
 			HumanB.cpp \
 			main.cpp
+
+#Headers
+HEADERS = HumanA.hpp \
+		  HumanB.hpp \
+		  Weapon.hpp
 
 #Objects
 OBJS	= $(SRCS:.cpp=.o)
@@ -34,7 +39,7 @@ OBJ = $(addprefix $(OBJS_DIR), $(OBJS))
 
 all: create_dir $(NAME)
 
-$(NAME): $(OBJ) Makefile
+$(NAME):  Makefile $(OBJ) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 create_dir:

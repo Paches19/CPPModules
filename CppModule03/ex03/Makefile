@@ -6,7 +6,7 @@
 #    By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 10:51:09 by adpachec          #+#    #+#              #
-#    Updated: 2023/06/09 13:49:27 by adpachec         ###   ########.fr        #
+#    Updated: 2023/07/06 13:50:13 by adpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,12 @@ SRCS	=	ClapTrap.cpp \
 			DiamondTrap.cpp \
 			main.cpp
 
+#Headers
+HEADERS = ClapTrap.hpp \
+		  FragTrap.hpp \
+		  ScavTrap.hpp \
+		  DiamondTrap.hpp
+		  
 #Objects
 OBJS	= $(SRCS:.cpp=.o)
 
@@ -35,7 +41,7 @@ OBJ = $(addprefix $(OBJS_DIR), $(OBJS))
 
 all: create_dir $(NAME)
 
-$(NAME): $(OBJ) Makefile
+$(NAME): Makefile $(OBJ) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 create_dir:

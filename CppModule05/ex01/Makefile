@@ -6,7 +6,7 @@
 #    By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 10:51:09 by adpachec          #+#    #+#              #
-#    Updated: 2023/06/13 10:40:50 by adpachec         ###   ########.fr        #
+#    Updated: 2023/07/06 13:44:34 by adpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,10 @@ NAME	=	sign
 SRCS	=	Bureaucrat.cpp \
 			Form.cpp \
 			main.cpp
+
+#Headers
+HEADERS = Bureaucrat.hpp \
+		  Form.hpp
 
 #Objects
 OBJS	= $(SRCS:.cpp=.o)
@@ -33,7 +37,7 @@ OBJ = $(addprefix $(OBJS_DIR), $(OBJS))
 
 all: create_dir $(NAME)
 
-$(NAME): $(OBJ) Makefile
+$(NAME): Makefile $(OBJ) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 create_dir:
