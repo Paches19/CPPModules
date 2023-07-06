@@ -6,7 +6,7 @@
 #    By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 10:51:09 by adpachec          #+#    #+#              #
-#    Updated: 2023/07/06 12:13:08 by adpachec         ###   ########.fr        #
+#    Updated: 2023/07/06 16:52:42 by adpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,14 @@ SRCS	=	RPN.cpp \
 			main.cpp
 
 #Headers
-HEADERS = RPN.hpp 
+HEADERS = RPN.hpp
 
 #Objects
 OBJS	= $(SRCS:.cpp=.o)
 
 #Flags
 CXX		= clang++
-CXXFLAGS	= -Wall -Wextra -Werror -Wshadow -std=c++98 
+CXXFLAGS	= -Wall -Wextra -Werror -Wshadow -std=c++98 -fsanitize=address
 
 #Folders
 OBJS_DIR = ./obj/
