@@ -6,23 +6,26 @@
 #    By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 10:51:09 by adpachec          #+#    #+#              #
-#    Updated: 2023/05/25 12:29:05 by adpachec         ###   ########.fr        #
+#    Updated: 2023/07/06 12:13:08 by adpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Program name
-NAME	=	loss
+NAME	=	RPN
 
 #Sources 
-SRCS	=	Account.cpp \
-			tests.cpp \
+SRCS	=	RPN.cpp \
+			main.cpp
+
+#Headers
+HEADERS = RPN.hpp 
 
 #Objects
 OBJS	= $(SRCS:.cpp=.o)
 
 #Flags
 CXX		= clang++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -Wshadow -std=c++98 
 
 #Folders
 OBJS_DIR = ./obj/
@@ -32,13 +35,13 @@ OBJ = $(addprefix $(OBJS_DIR), $(OBJS))
 
 all: create_dir $(NAME)
 
-$(NAME): $(OBJ) Makefile
+$(NAME): Makefile $(OBJ) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 create_dir:
 	@mkdir -p $(OBJS_DIR)
 
-$(OBJS_DIR)%.o: %.cpp
+$(OBJS_DIR)%.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:

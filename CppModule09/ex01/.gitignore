@@ -5,9 +5,5 @@
 *.o
 *.a
 a.out
-*.txt
 obj
-loss
-*.log
-19920104_091532.log
-log
+btc
