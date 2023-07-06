@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:00:33 by adpachec          #+#    #+#             */
-/*   Updated: 2023/06/14 14:33:52 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/07/06 13:18:04 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void ScalarConverter::display() const
 		val = INFINITY;
 	else
 	{
+		if (_str.back() == 'f')
+		{
+			ss.str("");
+			ss << _str.substr(0, _str.size() - 1);
+		}
 		if (!(ss >> val))
 			val = NAN;
 		else
@@ -73,7 +78,7 @@ void ScalarConverter::printAsInt(double val) const
 {
 	int i = static_cast<int>(val);
 
-	if (val < INT_MIN || val > INT_MAX || (val - static_cast<double>(i)) != 0)
+	if (val < INT_MIN || val > INT_MAX || ((val - static_cast<double>(i)) != 0 && val == INT_MIN))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << i << std::endl;
