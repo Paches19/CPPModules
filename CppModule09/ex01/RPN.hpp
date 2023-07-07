@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:33:40 by adpachec          #+#    #+#             */
-/*   Updated: 2023/07/06 17:48:02 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/07/07 14:04:39 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,31 @@
 
 # include <stack>
 # include <string>
+# include <cstring>
+# include <sstream>
 # include <iostream>
+# include <cstdlib>
+# include <vector>
 
 class RPN
 {
 	private:
-		std::stack<std::string>& _stack;
+		std::stack<std::string> _stack;
 
 	public:
 		RPN(void);
-		RPN(const std::stack<std::string>& stack);
-		RPN(int argc, char *argv[]);
+		RPN(char *argv[]);
 		RPN(const RPN& other);
 		~RPN(void);
 
 		RPN& operator=(const RPN& other);
 
 		void setStack(std::stack<std::string> stack);
-		void calculate();
-		void getResult(const float & num1, const float & num2, float & result);
+		void calculate(void);
+		void getResult(const std::string& operation, float& num1,
+			float& num2, float& result) const;
+		bool isNumber(const std::string& token) const;
+		bool isOperand(const std::string& token) const;
 };
 
 #endif

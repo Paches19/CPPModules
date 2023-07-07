@@ -6,31 +6,46 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:33:37 by adpachec          #+#    #+#             */
-/*   Updated: 2023/07/06 17:49:10 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/07/07 14:06:34 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-RPN::RPN() 
-{}
+RPN::RPN() {};
 
-RPN::RPN(const std::stack<std::string>& stack) : _stack(stack) {}
+template <typename T>
+void printStack(const std::stack<T>& s)
+{
+    std::stack<T> tempStack = s;
 
-RPN::RPN(int argc, char *argv[])
-{  
-	if (!argv || !argv[0])
-		return ;
-	for (; argc >= 1; --argc)
+    while (!tempStack.empty())
+    {
+        std::cout << tempStack.top() << " ";
+        tempStack.pop();
+    }
+
+    std::cout << std::endl;
+}
+
+RPN::RPN(char *argv[])
+{
+	std::vector<std::string> tempVec;
+	std::string token;
+	std::string arg = argv[1];
+	size_t pos = 0;
+
+	while((pos = arg.find(' ')) != std::string::npos)
 	{
-		std::string word(argv[argc - 1]);
-		this->_stack.push(word);
+		token = arg.substr(0, pos);
+		tempVec.push_back(token);
+		arg.erase(0, pos + 1);
 	}
-	for (int i = 0; i < 3; i++)
-	{
-		std::cout << this->_stack.top() << std::endl;
-		this->_stack.pop();
-	}
+	tempVec.push_back(arg);
+
+	for(std::vector<std::string>::reverse_iterator it = tempVec.rbegin();
+		it != tempVec.rend(); ++it)
+		_stack.push(*it);
 }
 
 RPN::RPN(const RPN& other)
@@ -43,7 +58,7 @@ RPN::~RPN() {};
 RPN& RPN::operator=(const RPN& other)
 {
 	if (this != &other)
-		this->setStack(other._stack);
+		this->_stack = other._stack;
 	return *this;
 }
 
@@ -54,40 +69,77 @@ void RPN::setStack(std::stack<std::string> stack)
 
 void RPN::calculate()
 {
-	float num1;
-	float num2;                                                   
-	float result = 0;
+	std::stack<float> resultStack;
 
 	while (!this->_stack.empty())
 	{
-		int count = 0;
-		while (count < 3)
+		const std::string token = this->_stack.top();
+		this->_stack.pop();
+		if (isNumber(token))
 		{
-			num1 = std::atof(this->_stack.top().c_str());
-			std::cout << "num1: " << num1 << std::endl;
-			this->_stack.pop();
-			num2 = std::atof(this->_stack.top().c_str());
-			std::cout << "num2: " << num2 << std::endl;
-			this->_stack.pop();
-			getResult(num1, num2, result);
+			float number = std::atof(token.c_str());
+			resultStack.push(number);
+		}
+		else if (isOperand(token))
+		{
+			if (resultStack.size() < 2)
+			{
+				std::cerr << "Error: Insufficient operands for operation." << std::endl;
+				return;
+			}
+			float operand2 = resultStack.top();
+			resultStack.pop();
+			float operand1 = resultStack.top();
+			resultStack.pop();
+			float result = 0.0;
+			getResult(token, operand1, operand2, result);
+			resultStack.push(result);
+		}
+		else
+		{
+			std::cerr << "Error: Invalid token." << std::endl;
+			return;
 		}
 	}
-	std::cout << "result" << result << std::endl;
+
+	if (resultStack.size() != 1)
+	{
+		std::cerr << "Error: Invalid expression. Cannot get a result" << std::endl;
+		return;
+	}
+
+	std::cout << resultStack.top() << std::endl;
+	resultStack.pop();
 }
 
-void RPN::getResult(const float & num1, const float & num2, float & result)
+void RPN::getResult(const std::string& operation, float& operand1, float& operand2, float& result) const
 {
-	std::string operation(this->_stack.top());
-	this->_stack.pop();
-	
 	if (operation == "+")
-		result = num1 + num2;
+		result = operand1 + operand2;
 	else if (operation == "-")
-		result = num1 - num2;
+		result = operand1 - operand2;
 	else if (operation == "*")
-		result = num1 * num2;
+		result = operand1 * operand2;
 	else if (operation == "/")
-		result = num1 / num2;
+		result = operand1 / operand2;
 	else
-		return ;
+		result = 0.0;
+}
+
+bool RPN::isNumber(const std::string& token) const
+{
+	if (token.empty())
+		return false;
+
+	for (std::size_t i = 0; i < token.length(); ++i)
+	{
+		if (!std::isdigit(token[i]))
+			return false;
+	}
+	return true;
+}
+
+bool RPN::isOperand(const std::string& token) const
+{
+	return (token == "+" || token == "-" || token == "*" || token == "/");
 }
