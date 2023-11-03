@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 13:56:22 by adpachec          #+#    #+#             */
-/*   Updated: 2023/07/06 12:30:29 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/03 10:40:19 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ class ScalarConverter
 {
 	private:
 		std::string _str;
+		
+		bool isOnlyDigits(const std::string &str) const;
+		
+		bool isChar() const;
+		bool isInt() const;
+		bool isFloat() const;
+		bool isDouble() const;
 		void printAsChar(double val) const;
 		void printAsInt(double val) const;
 		void printAsFloat(double val) const;
