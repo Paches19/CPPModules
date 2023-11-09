@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:00:33 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/09 11:46:04 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:24:37 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool ScalarConverter::isOnlyDigits(const std::string &str) const
 
 bool ScalarConverter::isChar() const
 {
-	if (_str.length() == 1 && _str[0] >= 32 && _str[0] <= 126)
+	if (_str.length() == 1 && isdigit(static_cast<int>(this->_str.c_str()[0])) == false)
 		return true;
 	return false;
 }
@@ -66,9 +66,8 @@ bool ScalarConverter::isDouble() const
 	return false;
 }
 
-void ScalarConverter::display() const
+void ScalarConverter::display()
 {
-	double val = 0;
 	std::stringstream ss(_str);
 
 	if (_str == "-inff" || _str == "-inf")
@@ -91,51 +90,56 @@ void ScalarConverter::display() const
 			val = static_cast<double>(atof(_str.c_str()));
 		else if (isDouble())
 			val = (atof(_str.c_str()));
+		else
+		{
+			std::cout << "Valor introducido incorrecto. Solo se admiten tipos char, int, float y double" << std::endl;
+			return ;
+		}
 	}
-	printAsChar(val);
-	printAsInt(val);
-	printAsFloat(val);
-	printAsDouble(val);
+	printAsChar();
+	printAsInt();
+	printAsFloat();
+	printAsDouble();
 }
 
-void ScalarConverter::printAsChar(double val) const
+void ScalarConverter::printAsChar()
 {
-	if (isNan(val) || isInf(val))
+	if (isNan() || isInf())
 		std::cout << "char: impossible" << std::endl;
 	else
 	{
 		char c = static_cast<char>(val);
 
-		if (val < -128 || val > 127 || c < 32 || c > 126)
+		if (c <= 32 || c >= 127 || val < -128 || val > 127)
 			std::cout << "char: Non displayable" << std::endl;
-		else if (!c && _str != "0")
+		else if (!isprint(c))
 			std::cout << "char: impossible" << std::endl;
-		else
+		else if (isprint(c))
 			std::cout << "char: '" << c << "'" << std::endl;
 	}
 }
 
-void ScalarConverter::printAsInt(double val) const
+void ScalarConverter::printAsInt()
 {
-	if (isInf(val) && val > 0)
+	if (isInf() && val > 0)
 		std::cout << "int: inf" << std::endl;
-	else if (isInf(val) && val < 0)
+	else if (isInf() && val < 0)
 		std::cout << "int: -inf" << std::endl;
-	else if (val < INT_MIN || val > INT_MAX || isNan(val))
+	else if (val < INT_MIN || val > INT_MAX || isNan())
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(val) << std::endl;
 }
 
-void ScalarConverter::printAsFloat(double val) const
+void ScalarConverter::printAsFloat()
 {
 	float f = static_cast<float>(val);
 
-	if (isNan(f))
+	if (isNan())
 		std::cout << "float: nanf" << std::endl;
-	else if (isInf(f) && f > 0)
+	else if (isInf() && f > 0)
 		std::cout << "float: inff" << std::endl;
-	else if (isInf(f) && f < 0)
+	else if (isInf() && f < 0)
 		std::cout << "float: -inff" << std::endl;
 	else if (val > __FLT_MAX__ || val < -1.79769e+38F || (val != 0 && std::abs(val) < __FLT_MIN__))
         std::cout << "float: impossible" << std::endl;
@@ -143,13 +147,13 @@ void ScalarConverter::printAsFloat(double val) const
 		std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
 }
 
-void ScalarConverter::printAsDouble(double val) const
+void ScalarConverter::printAsDouble()
 {
-	if (isNan(val))
+	if (isNan())
 		std::cout << "double: nan" << std::endl;
-	else if (isInf(val) && val > 0)
+	else if (isInf() && val > 0)
 		std::cout << "double: inf" << std::endl;
-	else if (isInf(val) && val < 0)
+	else if (isInf() && val < 0)
 		std::cout << "double: -inf" << std::endl;
 	else if (val == HUGE_VAL || val == -HUGE_VAL)
         std::cout << "double: impossible" << std::endl;
@@ -157,7 +161,7 @@ void ScalarConverter::printAsDouble(double val) const
 		std::cout << "double: " << std::fixed << std::setprecision(1) << val << std::endl;
 }
 
-bool ScalarConverter::isNan(double val) const
+bool ScalarConverter::isNan() const
 {
 	if (val == NAN)
 		return true;
@@ -165,7 +169,7 @@ bool ScalarConverter::isNan(double val) const
 	return d != d;
 }
 
-bool ScalarConverter::isInf(double val) const
+bool ScalarConverter::isInf() const
 {
 	return val == INFINITY || val == -INFINITY;
 }
