@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:00:33 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/09 16:22:11 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:37:41 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,46 @@ bool ScalarConverter::isOnlyDigits(const std::string &str) const
 	return true;
 }
 
+bool ScalarConverter::isOnlyDigitsFloat(const std::string &str) const
+{
+	for (size_t i = 0; i < str.length() - 1; i++)
+	{
+		if (i == 0 && (str[0] == '-' || str[0] == '+'))
+			;
+		else if (str[i] == '.')
+			;
+		else if (!isdigit(str[i]))
+			return false;
+	}
+	return true;
+}
+
 bool ScalarConverter::isChar() const
 {
-	if (_str.length() == 1 && isdigit(static_cast<int>(this->_str.c_str()[0])) == false)
+	if (_str.length() == 1 && isdigit(static_cast<int>(this->_str.c_str()[0])) == false
+			&& isOnlyDigits(_str))
 		return true;
 	return false;
 }
 
 bool ScalarConverter::isInt() const
 {
-	if (isOnlyDigits(_str))
+	if (isOnlyDigits(_str) && _str.find('.') == std::string::npos)
 		return true;
 	return false;
 }
 
 bool ScalarConverter::isFloat() const
 {
-	if (_str.find('.') != std::string::npos && _str[_str.size() - 1] == 'f')
+	if (_str.find('.') != std::string::npos && _str[_str.length() - 1] == 'f'
+		&& isOnlyDigits(_str))
 		return true;
 	return false;
 }
 
 bool ScalarConverter::isDouble() const
 {
-	if (_str.find('.') != std::string::npos && _str[_str.size() - 1] != 'f')
+	if (_str.find('.') != std::string::npos && isOnlyDigitsFloat(_str))
 		return true;
 	return false;
 }

@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 13:56:22 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/09 12:28:56 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:27:50 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class ScalarConverter
 		double		val;
 
 		bool isOnlyDigits(const std::string &str) const;
+		bool isOnlyDigitsFloat(const std::string &str) const;
 		
 		bool isChar() const;
 		bool isInt() const;
