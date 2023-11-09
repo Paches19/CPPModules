@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:00:33 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/03 11:26:26 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/09 11:46:04 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,16 @@ void ScalarConverter::display() const
 		{
 			ss.str("");
 			ss << _str.substr(0, _str.size() - 1);
+			if (!(ss >> val))
+				val = NAN;
+			val = static_cast<double>(atof(_str.c_str()));
 		}
-
-		if (isChar())
+		else if (isChar())
 			val = static_cast<double>(static_cast<int>(_str[0]));
 		else if (isInt())
 			val = static_cast<double>(atof(_str.c_str()));
-		else if (isFloat())
-			val = static_cast<double>(atof(_str.c_str()));
 		else if (isDouble())
 			val = (atof(_str.c_str()));
-		else if (!(ss >> val))
-			val = NAN;
 	}
 	printAsChar(val);
 	printAsInt(val);
@@ -139,7 +137,7 @@ void ScalarConverter::printAsFloat(double val) const
 		std::cout << "float: inff" << std::endl;
 	else if (isInf(f) && f < 0)
 		std::cout << "float: -inff" << std::endl;
-	else if (val > __FLT_MAX__ || val < -__FLT_MIN__ || (val != 0 && std::abs(val) < __FLT_MIN__))
+	else if (val > __FLT_MAX__ || val < -1.79769e+38F || (val != 0 && std::abs(val) < __FLT_MIN__))
         std::cout << "float: impossible" << std::endl;
 	else
 		std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
