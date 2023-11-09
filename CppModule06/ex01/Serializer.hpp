@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:55:24 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/09 14:09:46 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:11:14 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,18 @@ class Serializer
 
 		Serializer();
 		Serializer(int num);
+
+	public:
 		~Serializer();
 		Serializer(const Serializer& other);
 
 		Serializer& operator=(const Serializer& other);
-
-	public:
+		
 		uintptr_t serialize(Serializer* ptr);
 		Serializer* deserialize(uintptr_t raw);
 		
-		int	getNum(void);
+		static Serializer* crearSerializer(int num);
+		int getNum(void) const;
 };
 
 #endif
