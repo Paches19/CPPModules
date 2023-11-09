@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 13:56:22 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/09 12:16:11 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:28:56 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ class ScalarConverter
 		bool isInt() const;
 		bool isFloat() const;
 		bool isDouble() const;
+
+		void printImpossible();
 		void printAsChar();
 		void printAsInt();
 		void printAsFloat();

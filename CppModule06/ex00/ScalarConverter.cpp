@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:00:33 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/09 12:24:37 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:30:08 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void ScalarConverter::display()
 			val = (atof(_str.c_str()));
 		else
 		{
-			std::cout << "Valor introducido incorrecto. Solo se admiten tipos char, int, float y double" << std::endl;
+			printImpossible();
 			return ;
 		}
 	}
@@ -100,6 +100,14 @@ void ScalarConverter::display()
 	printAsInt();
 	printAsFloat();
 	printAsDouble();
+}
+
+void ScalarConverter::printImpossible()
+{
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: impossible" << std::endl;
+	std::cout << "double: impossible" << std::endl;
 }
 
 void ScalarConverter::printAsChar()
