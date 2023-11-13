@@ -6,12 +6,14 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:09:55 by adpachec          #+#    #+#             */
-/*   Updated: 2023/06/19 11:17:01 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/13 10:46:18 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WHATEVER_HPP
 # define WHATEVER_HPP
+
+#include <iostream>
 
 template<typename T>
 void swap(T& a, T& b)
