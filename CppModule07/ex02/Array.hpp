@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:26:22 by adpachec          #+#    #+#             */
-/*   Updated: 2023/06/19 12:28:56 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:08:44 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ARRAY_HPP
 
 # include <stdexcept>
+# include <iostream>
 
 template<typename T>
 class Array
@@ -70,9 +71,7 @@ class Array
 		T& operator[](unsigned int index)
 		{
 			if (index >= this->_size)
-			{
 				throw OutOfRange();
-			}
 			return this->_data[index];
 		}
 
