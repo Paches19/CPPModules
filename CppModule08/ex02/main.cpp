@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:24:24 by adpachec          #+#    #+#             */
-/*   Updated: 2023/06/19 14:07:04 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:02:47 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int main()
 {
 	//MutantStack
+	std::cout << "MUTANTSTACK " << std::endl;
 	MutantStack<int> mstack;
 	std::cout << "Push 5" << std::endl;
 	mstack.push(5);
@@ -38,19 +39,17 @@ int main()
 	MutantStack<int>::iterator ite = mstack.end();
 	++it;
 	--it;
-	std::cout << "- MUTANT - " << std::endl;
+	std::cout << "- MUTANTSTACK - " << std::endl;
 	while (it != ite)
 	{
 		std::cout << *it << std::endl;
 		++it;
 	}
-	std::stack<int> s(mstack);
-	std::cout << "Top copy stack: " << s.top() << std::endl;
-	std::cout << "Size copy stack: " << s.size() << std::endl;
-
-	 std::cout << std::endl;
-
+	std::cout << "------------- " << std::endl;
+	std::cout << std::endl;
+	
     // List
+	std::cout << "LIST " << std::endl;
     std::list<int> lst;
     std::cout << "Push 5" << std::endl;
     lst.push_back(5);
@@ -69,15 +68,16 @@ int main()
     lst.push_back(737);
     std::cout << "Push 0" << std::endl;
     lst.push_back(0);
-    std::list<int>::iterator lit = lst.begin();
-    std::list<int>::iterator lite = lst.end();
-    ++lit;
-    --lit;
+    std::list<int>::iterator lt = lst.begin();
+    std::list<int>::iterator lte = lst.end();
+    ++lt;
+    --lt;
     std::cout << "- LIST - " << std::endl;
-    while (lit != lite)
+    while (lt != lte)
     {
-        std::cout << *lit << std::endl;
-        ++lit;
+        std::cout << *lt << std::endl;
+        ++lt;
     }
+	std::cout << "------------- " << std::endl;
 	return 0;
 }

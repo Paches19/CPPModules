@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 13:49:32 by adpachec          #+#    #+#             */
-/*   Updated: 2023/06/19 13:58:42 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:03:53 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class MutantStack : public std::stack<T>
 	public:
 
 		MutantStack(void): std::stack<T>(){}
-		MutantStack(const MutantStack& other): std::stack<T>(other){return *this = this;}
+		MutantStack(const MutantStack& other): std::stack<T>(other){return *this = other;}
 		MutantStack & operator=(const MutantStack& other)
 		{
 			this->std::stack<T>::operator= (other);
