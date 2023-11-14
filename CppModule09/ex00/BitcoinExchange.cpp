@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:53:42 by adpachec          #+#    #+#             */
-/*   Updated: 2023/07/05 11:53:12 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:11:22 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void BitcoinExchange::loadDatabase(std::string& filename)
 		{
 			date = line.substr(0, pos);
 			value = line.substr(pos + 1);
-			_database[date] = stof(value);
+			_database[date] = std::atof(value.c_str());
 		}
 	}
 	inputFile.close();
@@ -91,7 +91,7 @@ void BitcoinExchange::getOutput(std::string& line)
 
 	if (isValidDate(date) && isValidValue(value))
 	{
-		float inputValue = stof(value);
+		float inputValue = std::atof(value.c_str());
 		float exchangeRate = getExchangeRate(date);
 		
 		if (exchangeRate > 0)
@@ -116,8 +116,8 @@ bool BitcoinExchange::isValidDate(const std::string& date)
 	std::string monthStr(date.substr(5, 2));
 	std::string dayStr(date.substr(8, 2));
 	
-	int month = stof(monthStr);
-	int day = stof(dayStr);
+	int month = std::atof(monthStr.c_str());
+	int day = std::atof(dayStr.c_str());
 
 	if (month < 1 || month > 12)
 	{
@@ -136,7 +136,7 @@ bool BitcoinExchange::isValidDate(const std::string& date)
 bool BitcoinExchange::isValidValue(std::string& value)
 {
     
-	float floatValue = stof(value);
+	float floatValue = std::atof(value.c_str());
 
 	if (floatValue < 0)
 	{
@@ -155,23 +155,15 @@ bool BitcoinExchange::isValidValue(std::string& value)
 float BitcoinExchange::getExchangeRate(const std::string& date)
 {
 	float closestExchangeRate = 0.0;
-	int minDateDifference = std::numeric_limits<int>::max();
 
-	std::map<std::string, float>::const_iterator it;
-	for (it = _database.begin(); it != _database.end(); ++it)
-	{
-		const std::string& currentDate = it->first;
-		if (it->first == date)
-			return it->second;
-		int currentDateDifference = getDateDifference(date, currentDate);
-
-		if (currentDateDifference > 0 && currentDateDifference < minDateDifference)
-		{
-			minDateDifference = currentDateDifference;
-			closestExchangeRate = it->second;
-		}
-	}
-
+	std::map<std::string, float>::const_iterator itLow;
+	std::map<std::string, float>::const_iterator itUp;
+	itLow = _database.lower_bound(date);
+	itUp = _database.upper_bound(date);
+	int currentDateDifference = getDateDifference(itLow->first, date);
+	closestExchangeRate = itLow->second;
+	if (getDateDifference(itUp->first, date) < currentDateDifference)
+		closestExchangeRate = itUp->second;
 	return closestExchangeRate;
 }
 
@@ -210,13 +202,4 @@ void BitcoinExchange::displayDatabase() const
 	std::map<std::string, float>::const_iterator it;
 	for (it = _database.begin(); it != _database.end(); ++it)
 		std::cout << it->first << " => " << std::fixed << std::setprecision(2) << it->second << std::endl;
-}
-
-float BitcoinExchange::stof(std::string& value) const
-{
-	float val;
-	std::stringstream ss(value);
-
-	ss >> val;
-	return val;
 }
