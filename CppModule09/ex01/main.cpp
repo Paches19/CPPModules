@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 11:12:34 by adpachec          #+#    #+#             */
-/*   Updated: 2023/07/07 14:04:58 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:19:08 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ int main(int argc, char* argv[])
 
     RPN rpn(argv);
     rpn.calculate();
-
     return 0;
 }

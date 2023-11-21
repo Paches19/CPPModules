@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:53:42 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/14 14:11:22 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:24:44 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void BitcoinExchange::getOutput(std::string& line)
 		float inputValue = std::atof(value.c_str());
 		float exchangeRate = getExchangeRate(date);
 		
-		if (exchangeRate > 0)
+		if (exchangeRate >= 0)
 		{
 			float result = exchangeRate * inputValue;
 			std::cout << date << " => " << inputValue << " = " << result << std::endl;
@@ -135,9 +135,18 @@ bool BitcoinExchange::isValidDate(const std::string& date)
 
 bool BitcoinExchange::isValidValue(std::string& value)
 {
-    
+	for (size_t i = 0; i < value.length(); i++)
+	{
+		if (i == 0 && (value[0] == '-' || value[0] == '+'))
+			;
+		else if (!std::isdigit(value[i]))
+		{
+			std::cerr << "Error: Value must be a positive number in range [0-1000]. Value: " << value << std::endl;
+			return false;
+		}
+	}
+	
 	float floatValue = std::atof(value.c_str());
-
 	if (floatValue < 0)
 	{
 		std::cerr << "Error: Value must be positive in range [0-1000]. Value: " << value << std::endl;
@@ -148,53 +157,17 @@ bool BitcoinExchange::isValidValue(std::string& value)
 		std::cerr << "Error: Value is too large not in range [0, 1000]. Value: " << value << std::endl;
 		return false;
 	}
-
 	return true;
 }
 
 float BitcoinExchange::getExchangeRate(const std::string& date)
 {
-	float closestExchangeRate = 0.0;
-
-	std::map<std::string, float>::const_iterator itLow;
-	std::map<std::string, float>::const_iterator itUp;
-	itLow = _database.lower_bound(date);
-	itUp = _database.upper_bound(date);
-	int currentDateDifference = getDateDifference(itLow->first, date);
-	closestExchangeRate = itLow->second;
-	if (getDateDifference(itUp->first, date) < currentDateDifference)
-		closestExchangeRate = itUp->second;
-	return closestExchangeRate;
-}
-
-int BitcoinExchange::getDateDifference(const std::string& date1, const std::string& date2)
-{
-	int year1, month1, day1;
-	int year2, month2, day2;
-
-	std::sscanf(date1.c_str(), "%d-%d-%d", &year1, &month1, &day1);
-	std::sscanf(date2.c_str(), "%d-%d-%d", &year2, &month2, &day2);
-
-	std::tm tm1;
-	std::tm tm2;
-	std::memset(&tm1, 0, sizeof(std::tm));
-	std::memset(&tm2, 0, sizeof(std::tm));
-
-	tm1.tm_year = year1 - 1900;
-	tm1.tm_mon = month1 - 1;
-	tm1.tm_mday = day1;
-
-	tm2.tm_year = year2 - 1900;
-	tm2.tm_mon = month2 - 1;
-	tm2.tm_mday = day2;
-
-	std::time_t time1 = std::mktime(&tm1);
-	std::time_t time2 = std::mktime(&tm2);
-
-	const int secondsPerDay = 60 * 60 * 24;
-	int dateDifference = std::difftime(time1, time2) / secondsPerDay;
-
-	return (dateDifference);
+	std::map<std::string, float>::const_iterator it;
+	it = _database.upper_bound(date);
+	if (it == _database.begin())
+		return (_database.begin()->second);
+	--it;
+	return it->second;
 }
 
 void BitcoinExchange::displayDatabase() const

@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:33:37 by adpachec          #+#    #+#             */
-/*   Updated: 2023/07/07 14:06:34 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:25:32 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void RPN::calculate()
 			if (resultStack.size() < 2)
 			{
 				std::cerr << "Error: Insufficient operands for operation." << std::endl;
-				return;
+				return ;
 			}
 			float operand2 = resultStack.top();
 			resultStack.pop();
@@ -120,7 +120,7 @@ void RPN::getResult(const std::string& operation, float& operand1, float& operan
 		result = operand1 - operand2;
 	else if (operation == "*")
 		result = operand1 * operand2;
-	else if (operation == "/")
+	else if (operation == "/" && operand2 != 0)
 		result = operand1 / operand2;
 	else
 		result = 0.0;
