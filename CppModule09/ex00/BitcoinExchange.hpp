@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:51:26 by adpachec          #+#    #+#             */
-/*   Updated: 2023/07/05 11:48:41 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/22 10:23:53 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 #include <sstream>
 #include <map>
 #include <limits>
-#include <ctime>
 #include <cstdio>
 #include <cmath>
 
@@ -34,7 +33,6 @@ class BitcoinExchange
 		bool isValidDate(const std::string& date);
 		bool isValidValue(std::string& value);
 		float getExchangeRate(const std::string& inputKey);
-		int getDateDifference(const std::string& date1, const std::string& date2);
 		void getOutput(std::string& line);
 
 	public:
@@ -46,7 +44,6 @@ class BitcoinExchange
 
 		void displayDatabase(void) const;
 		void displayOutput(std::string& filename);
-		float stof(std::string& value) const;
 };
 
 #endif

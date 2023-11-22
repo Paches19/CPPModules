@@ -6,7 +6,7 @@
 #    By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 10:51:09 by adpachec          #+#    #+#              #
-#    Updated: 2023/11/21 11:00:45 by adpachec         ###   ########.fr        #
+#    Updated: 2023/11/22 10:23:16 by adpachec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS	= $(SRCS:.cpp=.o)
 
 #Flags
 CXX		= clang++
-CXXFLAGS	= -Wall -Wextra -Werror -Wshadow -std=c++98 -fsanitize=address
+CXXFLAGS	= -Wall -Wextra -Werror -Wshadow -std=c++98
 
 #Folders
 OBJS_DIR = ./obj/

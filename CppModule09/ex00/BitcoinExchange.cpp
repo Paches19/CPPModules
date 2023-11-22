@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:53:42 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/21 11:24:44 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/22 10:28:09 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void BitcoinExchange::loadDatabase(std::string& filename)
 		{
 			date = line.substr(0, pos);
 			value = line.substr(pos + 1);
-			_database[date] = std::atof(value.c_str());
+			_database[date] = atof(value.c_str());
 		}
 	}
 	inputFile.close();
@@ -71,8 +71,6 @@ void BitcoinExchange::displayOutput(std::string& filename)
 	}
 
 	std::string line;
-	if (!(std::getline(inputFile, line) && line == "date | value"))
-		getOutput(line);
 
 	while (std::getline(inputFile, line))
 		getOutput(line);
@@ -85,13 +83,26 @@ void BitcoinExchange::getOutput(std::string& line)
 	std::string date;
 	std::string value;
 
+	if (line.empty())
+	{
+		std::cerr << "Error: empty input" << std::endl;
+		return ;
+	}
 	size_t pos = line.find('|');
-	date = line.substr(0, pos - 1);
-	value = line.substr(pos + 2);
+	if (pos != std::string::npos && pos >= 1)
+	{
+			date = line.substr(0, pos - 1);
+			value = line.substr(pos + 2);
+	}
+	else
+	{
+		std::cerr << "Error: incorrect input: " << line << std::endl;
+		return ;
+	}
 
 	if (isValidDate(date) && isValidValue(value))
 	{
-		float inputValue = std::atof(value.c_str());
+		float inputValue = atof(value.c_str());
 		float exchangeRate = getExchangeRate(date);
 		
 		if (exchangeRate >= 0)
@@ -116,8 +127,8 @@ bool BitcoinExchange::isValidDate(const std::string& date)
 	std::string monthStr(date.substr(5, 2));
 	std::string dayStr(date.substr(8, 2));
 	
-	int month = std::atof(monthStr.c_str());
-	int day = std::atof(dayStr.c_str());
+	int month = atoi(monthStr.c_str());
+	int day = atoi(dayStr.c_str());
 
 	if (month < 1 || month > 12)
 	{
@@ -137,16 +148,14 @@ bool BitcoinExchange::isValidValue(std::string& value)
 {
 	for (size_t i = 0; i < value.length(); i++)
 	{
-		if (i == 0 && (value[0] == '-' || value[0] == '+'))
-			;
-		else if (!std::isdigit(value[i]))
+		if (!std::isdigit(value[i]) && value[i] != '.')
 		{
 			std::cerr << "Error: Value must be a positive number in range [0-1000]. Value: " << value << std::endl;
 			return false;
 		}
 	}
 	
-	float floatValue = std::atof(value.c_str());
+	float floatValue = atof(value.c_str());
 	if (floatValue < 0)
 	{
 		std::cerr << "Error: Value must be positive in range [0-1000]. Value: " << value << std::endl;
