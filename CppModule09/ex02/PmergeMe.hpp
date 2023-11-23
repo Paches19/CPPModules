@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:48:54 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/23 13:02:22 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:25:05 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ class PmergeMe
         int secondLastJacobsthal;
 
 		static bool isNumber(const std::string& str);
+
+		template<typename T>
+		void merge(T& left, T& right);
+
+		template<typename T>
+		void mergeSort(T& container);
 
         template<typename T>
         void mergeInsertionSort(T& container);

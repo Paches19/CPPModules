@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:48:49 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/23 13:04:21 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:27:35 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,63 @@ void PmergeMe::sortAndPrint()
 	// 	" elements with std::deque: " << timeToExecute << " s\n";
 	// std::cout << std::endl;
 	
-	printContainer(_numbersList, "std::list", 1);
+	// printContainer(_numbersList, "std::list", 1);
 	start = clock();
 	mergeInsertionSort(_numbersList);
 	end = clock();
 	timeToExecute = ((double) (end - start)) / CLOCKS_PER_SEC;
 	printContainer(_numbersList, "std::list", 0);
 	std::cout << "Time to process a range of " << _numbersList.size() << " elements with std::list: " << timeToExecute << " s\n";
+}
+
+template<typename T>
+void PmergeMe::merge(T& left, T& right)
+{
+	T result;
+	while (!left.empty() && !right.empty())
+	{
+		if (left.front() <= right.front())
+		{
+			result.push_back(left.front());
+			left.pop_front();
+		}
+		else
+		{
+			result.push_back(right.front());
+			right.pop_front();
+		}
+	}
+	while (!left.empty())
+	{
+		result.push_back(left.front());
+		left.pop_front();
+	}
+	while (!right.empty())
+	{
+		result.push_back(right.front());
+		right.pop_front();
+	}
+	left = result;
+}
+
+template<typename T>
+void PmergeMe::mergeSort(T& container)
+{
+	if (container.size() <= 1)
+		return;
+
+	typename T::iterator middle = container.begin();
+	std::advance(middle, container.size() / 2);
+	
+	T left(container.begin(), middle);
+	T right(middle, container.end());
+	
+	mergeSort(left);
+	mergeSort(right);
+	
+	merge(left, right);
+	
+	container = left;
 }
 
 template<typename T>
@@ -142,14 +192,24 @@ if (container.empty() || isSorted(container)) {
 			mainChain.push_back(first); // Si hay un número impar de elementos
 		}
 	}
+	mergeSort(mainChain);
+	// std::cout << "Main Chain "<< std::endl;
+	// std::copy(mainChain.begin(), mainChain.end(), std::ostream_iterator<int>(std::cout, " "));
+	// std::cout << std::endl;
+	// std::cout << "Pend Chain "<< std::endl;
+	// std::copy(pendElements.begin(), pendElements.end(), std::ostream_iterator<int>(std::cout, " "));
+	// std::cout << std::endl;
 	// Paso 2: Insertar los elementos pendientes en la cadena principal
-    while (!pendElements.empty()) {
+    while (!pendElements.empty())
+	{
         std::list<int>::iterator lowestCostElementIt = pendElements.begin();
         int lowestCost = calculateInsertionCost(pendElements, *lowestCostElementIt);
         // Encuentra el elemento con el coste más bajo
-        for (std::list<int>::iterator it2 = ++pendElements.begin(); it2 != pendElements.end(); ++it2) {
+        for (std::list<int>::iterator it2 = ++pendElements.begin(); it2 != pendElements.end(); ++it2)
+		{
             int cost = calculateInsertionCost(pendElements, *it2);
-            if (cost < lowestCost) {
+            if (cost < lowestCost)
+			{
                 lowestCost = cost;
                 lowestCostElementIt = it2;
             }
@@ -160,6 +220,12 @@ if (container.empty() || isSorted(container)) {
         mainChain.insert(insertPos, *lowestCostElementIt);
         // Elimina el elemento de pendElements
         pendElements.erase(lowestCostElementIt);
+		// std::cout << "Main Chain "<< std::endl;
+		// std::copy(mainChain.begin(), mainChain.end(), std::ostream_iterator<int>(std::cout, " "));
+		// std::cout << std::endl;
+		// std::cout << "Pend Chain "<< std::endl;
+		// std::copy(pendElements.begin(), pendElements.end(), std::ostream_iterator<int>(std::cout, " "));
+		// std::cout << std::endl;
     }
 
 	// Paso 3: Reconstruir el arreglo ordenado
@@ -170,9 +236,8 @@ if (container.empty() || isSorted(container)) {
 std::list<int>::iterator PmergeMe::findInsertPosition(std::list<int>& mainChain, int value)
 {
     std::list<int>::iterator it = mainChain.begin();
-    while (it != mainChain.end() && *it < value) {
+    while (it != mainChain.end() && *it < value)
         ++it;
-    }
     return it;
 }
 
