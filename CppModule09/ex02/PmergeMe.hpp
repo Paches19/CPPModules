@@ -6,7 +6,7 @@
 /*   By: adpachec <adpachec@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:48:54 by adpachec          #+#    #+#             */
-/*   Updated: 2023/11/24 12:23:56 by adpachec         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:39:14 by adpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,11 @@ class PmergeMe
 
 		static bool isNumber(const std::string& str);
 		
-		void formPairs(std::list<int>& container, std::list<Pair>& pairs, std::list<long>& singleElements);
 		void merge(std::list<Pair>& left, std::list<Pair>& right, std::list<Pair>& result);
 		void mergeSort(std::list<Pair>& container);
 		void insertInMainChain(std::list<int>& mainChain, std::list<int>& pendElements);
 		void mergeInsertionSort(std::list<int>& container);
 
-		void formPairs(std::deque<int>& container, std::deque<Pair>& pairs, std::deque<long>& singleElements);
 		void merge(std::deque<Pair>& left, std::deque<Pair>& right, std::deque<Pair>& result);
 		void mergeSort(std::deque<Pair>& container);
 		void insertInMainChain(std::deque<int>& mainChain, std::deque<int>& pendElements);
